@@ -24,12 +24,12 @@ class PBatch {
 
 		this.loader(keys)
 			.then(results => {
-				for (let i = 0; i < results.length; ++i) {
+				for (let i = 0; i < promises.length; ++i) {
 					promises[i].resolve(results[i]);
 				}
 			})
 			.catch(err => {
-				for (let i = 0; i < err.length; ++i) {
+				for (let i = 0; i < promises.length; ++i) {
 					if (Array.isArray(err)) {
 						promises[i].reject(err[i]);
 					} else {

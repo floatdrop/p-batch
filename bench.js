@@ -5,9 +5,18 @@ const PBatch = require('./');
 
 const suite = new Benchmark.Suite();
 
-const KEYS = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const KEYS = [];
+for (let i = 0; i < 128; i++) {
+	KEYS.push(i);
+}
 
 suite
+	.add('load', deferred => {
+		const load = keys => Promise.resolve(keys);
+		load(KEYS).then(() => deferred.resolve());
+	}, {
+		defer: true
+	})
 	.add('PBatch', deferred => {
 		const batch = new PBatch(keys => Promise.resolve(keys));
 		Promise.all(KEYS.map(key => batch.add(key))).then(() => deferred.resolve());
