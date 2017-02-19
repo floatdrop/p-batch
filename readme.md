@@ -51,7 +51,7 @@ Maximum batch size.
 
 Type: `Function`<br>
 
-Executed after each key put in `this.batch`. By default schedules `this.dispatch()` call on `process.nextTick` (if `this.batch` is not empty already).
+Executed after each key put in batch. By default schedules `batch.dispatch()` call on `process.nextTick` (if batch is not empty already).
 
 Useful, if you need to wait constant time after last key batching (for ex.).
 
