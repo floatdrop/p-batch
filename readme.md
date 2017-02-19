@@ -50,7 +50,6 @@ Maximum batch size.
 ##### onKey
 
 Type: `Function`<br>
-Default: `Infinity`
 
 Executed after each key put in `this.batch`. By default schedules `this.dispatch()` call on `process.nextTick` (if `this.batch` is not empty already).
 
