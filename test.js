@@ -55,3 +55,13 @@ test('dispatch method', async t => {
 
 	t.deepEqual(results, [[1, 2], [3]]);
 });
+
+test('dispatchSignal', async t => {
+	const results = [];
+	const pBatch = new PBatch(keys => results.push(keys), {
+		onKey: () => pBatch.dispatch()
+	});
+	await Promise.all([pBatch.add(1), pBatch.add(2)]);
+
+	t.deepEqual(results, [[1], [2]]);
+});

@@ -3,23 +3,25 @@
 class PBatch {
 	constructor(loader, opts) {
 		opts = Object.assign({
-			maxBatchSize: Infinity
+			maxBatchSize: Infinity,
+			onKey: () => this.batch.length && process.nextTick(() => this.dispatch())
 		}, opts);
 
 		this.loader = loader;
 		this.maxBatchSize = opts.maxBatchSize;
-		this._keysQueue = [];
+		this.onKey = opts.onKey;
+		this.batch = [];
 		this._promisesQueue = [];
 	}
 
 	dispatch() {
-		if (this._keysQueue.length === 0) {
+		if (this.batch.length === 0) {
 			return;
 		}
 
-		const keys = this._keysQueue;
+		const keys = this.batch;
 		const promises = this._promisesQueue;
-		this._keysQueue = [];
+		this.batch = [];
 		this._promisesQueue = [];
 
 		const promise = Promise.resolve(this.loader(keys));
@@ -43,17 +45,15 @@ class PBatch {
 	}
 
 	add(key) {
-		if (this._keysQueue.length === 0) {
-			process.nextTick(() => this.dispatch());
-		}
-
 		return new Promise((resolve, reject) => {
-			this._keysQueue.push(key);
+			this.batch.push(key);
 			this._promisesQueue.push({resolve, reject});
 
-			if (this._keysQueue.length >= this.maxBatchSize) {
-				this.dispatch();
+			if (this.batch.length >= this.maxBatchSize) {
+				return this.dispatch();
 			}
+
+			this.onKey(key);
 		});
 	}
 }
