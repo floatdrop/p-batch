@@ -38,3 +38,9 @@ test('reject with array of errors', async t => {
 	const pBatch = new PBatch(keys => new Promise((resolve, reject) => reject(keys)));
 	await Promise.all([1, 2, 3, 4, 5].map(key => pBatch.add(key).catch(err => t.is(err, key))));
 });
+
+test('accepts sync function as loader', async t => {
+	const pBatch = new PBatch(keys => keys);
+	const result = await Promise.all([1, 2, 3, 4, 5].map(key => pBatch.add(key)));
+	t.deepEqual(result, [1, 2, 3, 4, 5]);
+});

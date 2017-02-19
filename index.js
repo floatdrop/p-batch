@@ -22,7 +22,7 @@ class PBatch {
 		this._keysQueue = [];
 		this._promisesQueue = [];
 
-		this.loader(keys)
+		Promise.resolve(this.loader(keys))
 			.then(results => {
 				for (let i = 0; i < promises.length; ++i) {
 					promises[i].resolve(results[i]);
