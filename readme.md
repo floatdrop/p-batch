@@ -17,7 +17,7 @@ const PBatch = require('p-batch');
 
 batch = new PBatch(keys => {
 	console.log('Batching', keys);
-	return Promise.resolve(keys.map(k => k + 1));
+	return keys.map(k => k + 1);
 });
 
 const results = await Promise.all([1, 2, 3, 4, 5].map(key => batch.add(key));
@@ -37,7 +37,7 @@ Returns a new `batch` instance.
 
 Type: `Function`
 
-Loader function. Accepts array of batched keys and must return Promise, that resolves to array of results or rejects with array of errors (or plain error, that will propagate to all promises).
+Loader function. Accepts array of batched keys and returns array of results or throws with array of errors (or plain error, that will propagate to all promises).
 
 #### options
 
