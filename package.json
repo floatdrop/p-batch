@@ -1,6 +1,6 @@
 {
   "name": "p-batch",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Batch async operations",
   "license": "MIT",
   "repository": "floatdrop/p-batch",
