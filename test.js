@@ -44,3 +44,14 @@ test('accepts sync function as loader', async t => {
 	const result = await Promise.all([1, 2, 3, 4, 5].map(key => pBatch.add(key)));
 	t.deepEqual(result, [1, 2, 3, 4, 5]);
 });
+
+test('dispatch method', async t => {
+	const results = [];
+	const pBatch = new PBatch(keys => results.push(keys));
+	pBatch.add(1);
+	pBatch.add(2);
+	pBatch.dispatch();
+	await pBatch.add(3);
+
+	t.deepEqual(results, [[1, 2], [3]]);
+});

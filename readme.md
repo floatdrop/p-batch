@@ -2,7 +2,6 @@
 
 > Batch async operations
 
-
 ## Install
 
 ```
@@ -55,6 +54,12 @@ Maximum batch size.
 #### .add(key)
 
 Adds key to current batch. If batch is empty – schedules dispatch on next tick.
+
+#### .dispatch()
+
+Runs `loader` on batched keys. Useful, when batch should be dispatched right now.
+
+By default current batch will be dispatched on next tick.
 
 
 ## License
