@@ -2,6 +2,8 @@
 
 > Batch async operations
 
+Useful, when you have batch endpoint (that can accept multiple queries at once) and want to group requests to this endpoint in parallel user requests.
+
 ## Install
 
 ```
