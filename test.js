@@ -65,3 +65,11 @@ test('onKey', async t => {
 
 	t.deepEqual(results, [[1], [2]]);
 });
+
+test('addAll shortcut', async t => {
+	const results = [];
+	const pBatch = new PBatch(keys => results.push(keys));
+	await pBatch.addAll([1, 2]);
+
+	t.deepEqual(results, [[1, 2]]);
+});

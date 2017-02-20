@@ -56,6 +56,10 @@ class PBatch {
 			this.onKey(key);
 		});
 	}
+
+	addAll(keys) {
+		return Promise.all(keys.map(key => this.add(key)));
+	}
 }
 
 module.exports = PBatch;

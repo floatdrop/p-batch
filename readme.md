@@ -68,6 +68,10 @@ Useful, if you need to wait constant time after last key batching (for ex.).
 
 Adds key to current batch. If batch is empty – schedules dispatch on next tick.
 
+#### .addAll(keys)
+
+Shortcut for `Promise.all(keys.map(key => batch.add(key)))`.
+
 #### .dispatch()
 
 Runs `loader` on batched keys. Useful, when batch should be dispatched right now.
