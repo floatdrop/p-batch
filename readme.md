@@ -19,11 +19,14 @@ const PBatch = require('p-batch');
 batch = new PBatch(keys => {
 	console.log('Batching', keys);
 	return keys.map(k => k + 1);
+}, {
+	maxBatchSize: 3
 });
 
 const results = await Promise.all([1, 2, 3, 4, 5].map(key => batch.add(key));
 
-// first logs "Batching [1, 2, 3, 4, 5]"
+// first logs "Batching [1, 2, 3]"
+// then       "Batching [4, 5]"
 // results will contain [2, 3, 4, 5, 6]
 ```
 
