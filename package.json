@@ -27,6 +27,7 @@
   "devDependencies": {
     "ava": "*",
     "benchmark": "^2.1.3",
+    "bluebird": "^3.4.7",
     "dataloader": "^1.3.0",
     "xo": "*"
   }

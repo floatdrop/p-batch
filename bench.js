@@ -1,4 +1,7 @@
 'use strict';
+
+global.Promise = require('bluebird');
+
 const Benchmark = require('benchmark');
 const Dataloader = require('dataloader');
 const PBatch = require('./');
