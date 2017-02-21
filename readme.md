@@ -52,13 +52,14 @@ Default: `Infinity`
 
 Maximum batch size.
 
-##### onKey
+##### dispatchSignal
 
 Type: `Function`<br>
+Default: `fn => process.nextTick(fn)`
 
-Executed after each key put in batch. By default schedules `batch.dispatch()` call on `process.nextTick` (if batch is not empty already).
+Executed after first key put in batch. It should call it's first argument, when it is time for dispatching.
 
-Useful, if you need to wait constant time after last key batching (for ex.).
+Useful, if you need to wait constant time after last key batching for ex.
 
 ### batch
 

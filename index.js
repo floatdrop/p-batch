@@ -4,12 +4,12 @@ class PBatch {
 	constructor(loader, opts) {
 		opts = Object.assign({
 			maxBatchSize: Infinity,
-			onKey: () => this._batch.length === 1 && process.nextTick(() => this.dispatch())
+			dispatchSignal: fn => process.nextTick(fn)
 		}, opts);
 
 		this.loader = loader;
 		this.maxBatchSize = opts.maxBatchSize;
-		this.onKey = opts.onKey;
+		this.dispatchSignal = opts.dispatchSignal;
 		this._batch = [];
 		this._promisesQueue = [];
 	}
@@ -53,7 +53,9 @@ class PBatch {
 				return this.dispatch();
 			}
 
-			this.onKey(key);
+			if (this._batch.length === 1) {
+				this.dispatchSignal(() => this.dispatch());
+			}
 		});
 	}
 
