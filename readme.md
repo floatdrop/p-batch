@@ -80,6 +80,12 @@ Runs `loader` on batched keys. Useful, when batch should be dispatched right now
 By default current batch will be dispatched on next tick.
 
 
+## Related
+
+- [delay](https://github.com/sindresorhus/delay) - Delay a promise a specified amount of time
+- [More…](https://github.com/sindresorhus/promise-fun)
+
+
 ## License
 
 MIT © [Vsevolod Strukchinsky](http://github.com/floatdrop)
