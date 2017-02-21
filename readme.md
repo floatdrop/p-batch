@@ -2,7 +2,8 @@
 
 > Batch async operations
 
-Useful, when you have batch endpoint (that can accept multiple queries at once) and want to group requests to this endpoint in parallel user requests.
+Useful, when you have batch endpoint (that can accept multiple queries at once) and want to group requests to this endpoint.
+
 
 ## Install
 
@@ -29,6 +30,8 @@ const results = await Promise.all([1, 2, 3, 4, 5].map(key => batch.add(key));
 // then       "Batching [4, 5]"
 // results will contain [2, 3, 4, 5, 6]
 ```
+
+For more loader examples you can look at [Facebook dataloader examples](https://github.com/facebook/dataloader/tree/master/examples) folder.
 
 
 ## API
